@@ -1,25 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useState } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import AppRoute from './route'
+import './assets/css/index.css'
 function App() {
+  const [darkactive, setdarkactive] = useState(Boolean);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter >
+      <div className={darkactive ? 'dark' : 'light'}>
+        <AppRoute />
+        <div data-url="http://www.google.com" className="dark-mode-switcher cursor-pointer shadow-md fixed bottom-0 right-0 box dark:bg-dark-2 border rounded-full w-40 h-12 flex items-center justify-center z-50 mb-10 mr-10" >
+          <div className="mr-4 text-gray-700 dark:text-gray-300">Dark Mode</div>
+          <div className={darkactive ? 'dark-mode-switcher__toggle dark-mode-switcher__toggle--active border ' : 'dark-mode-switcher__toggle  border'} onClick={() => { setdarkactive(!darkactive) }}></div>
+        </div>
+      </div>
+    </BrowserRouter>
   );
 }
 
